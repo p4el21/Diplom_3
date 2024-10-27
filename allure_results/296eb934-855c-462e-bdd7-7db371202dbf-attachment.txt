@@ -1,0 +1,2 @@
+Element with locator ('xpath', '//a[contains(@class, "AppHeader_header") and @href="/account"]') not found within 30 seconds.
+Failed to click on element with ('xpath', '//a[contains(@class, "AppHeader_header") and @href="/account"]').
