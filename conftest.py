@@ -11,7 +11,6 @@ from src.config import Config
 from src.helpers import generate_random_user
 
 @pytest.fixture
-@allure.description('Создание нового пользователя')
 def create_user():
     user_data = generate_random_user()
     response = requests.post(f'{Config.URL}api/auth/register', json=user_data)
@@ -22,8 +21,6 @@ def create_user():
     requests.delete(f'{Config.URL}api/auth/user', headers={'Authorization': f'Bearer {token}'})
 
 @pytest.fixture
-@allure.title('Проверка перехода в историю заказов в личном кабинете')
-@allure.description('Тест проверяет, что можно успешно перейти в историю заказов, находясь в личном кабинете')
 def login_user(driver, create_user):
     user_data = create_user['user_data']
     email = user_data['email']
@@ -51,7 +48,6 @@ def driver(request):
     browser.quit()
 
 @pytest.fixture
-@allure.description('Создание заказа')
 def create_order_auth_user(auth_user):
     user_data = auth_user['user_data']
     token = auth_user['token']
@@ -66,7 +62,6 @@ def create_order_auth_user(auth_user):
     yield {'user_data': user_data, 'token': token}
 
 @pytest.fixture
-@allure.description('Авторизация пользователя')
 def auth_user(create_user):
     user_data = create_user['user_data']
     token = create_user['token']

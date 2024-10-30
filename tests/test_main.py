@@ -1,5 +1,5 @@
 import allure
-from selenium.webdriver.common.by import By
+from locators.main_page_locators import MainLocators
 from pages.main_page import MainPage
 from src.config import Config
 
@@ -10,7 +10,7 @@ class TestMain:
         main_page = MainPage(driver)
         main_page.open_page(Config.URL)
         main_page.click_to_orders_list()
-        assert driver.current_url == 'https://stellarburgers.nomoreparties.site/feed'
+        assert driver.current_url == Config.URL_FEED
 
     @allure.title('Проверка перехода на конструктор')
     @allure.description('Тест проверяет, что можно успешно перейти на страницу с конструктором')
@@ -19,7 +19,7 @@ class TestMain:
         main_page.open_page(Config.URL)
         main_page.click_to_orders_list()
         main_page.click_to_constructor()
-        assert driver.current_url == 'https://stellarburgers.nomoreparties.site/'
+        assert driver.current_url == Config.URL
 
     @allure.title('Проверка клика на ингредиент')
     @allure.description('Тест проверяет, что при нажатии на ингредиент всплывает окно с деталями')
@@ -42,11 +42,9 @@ class TestMain:
     def test_add_ingredient(self, driver):
         main_page = MainPage(driver)
         main_page.open_page(Config.URL)
-        base_value = int(driver.find_element(By.XPATH,
-                                             './/a[@href="/ingredient/61c0c5a71d1f82001bdaaa6d"]//div[contains(@class, "counter_counter")]').text)
+        base_value = int(driver.find_element(*MainLocators.COUNTER).text)
         main_page.drag_ingredient()
-        new_value = int(driver.find_element(By.XPATH,
-                                            '//a[@href="/ingredient/61c0c5a71d1f82001bdaaa6d"]//div[contains(@class, "counter_counter")]').text)
+        new_value = int(driver.find_element(*MainLocators.COUNTER).text)
         assert new_value == base_value + 2
 
     @allure.title('Проверка оформления заказ')

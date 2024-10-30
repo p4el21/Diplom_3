@@ -10,7 +10,7 @@ class TestPersonalAccount:
         personal_page.open_page(Config.URL)
         personal_page.click_to_button_from_up()
         personal_page.wait_for_account_login()
-        assert driver.current_url == 'https://stellarburgers.nomoreparties.site/login'
+        assert driver.current_url == Config.URL_LOGIN
 
     @allure.title('Проверка перехода в историю заказов в личном кабинете')
     @allure.description('Тест проверяет, что можно успешно перейти в историю заказов, находясь в личном кабинете')
@@ -27,7 +27,7 @@ class TestPersonalAccount:
         personal_page.wait_for_account_page()
         personal_page.click_button_history()
         personal_page.wait_for_history_page()
-        assert driver.current_url == 'https://stellarburgers.nomoreparties.site/account/order-history'
+        assert driver.current_url == Config.URL_HISTORY
 
     @allure.title('Проверка выхода из аккаунта в личном кабинете')
     @allure.description('Тест проверяет, что можно успешно выйти из аккаунта, находясь в личном кабинете')
@@ -44,4 +44,4 @@ class TestPersonalAccount:
         personal_page.wait_for_account_page()
         personal_page.click_button_logout()
         personal_page.wait_for_account_login()
-        assert driver.current_url == 'https://stellarburgers.nomoreparties.site/login'
+        assert driver.current_url == Config.URL_LOGIN

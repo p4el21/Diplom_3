@@ -1,6 +1,8 @@
 import time
 import allure
 from selenium.webdriver.common.by import By
+
+from locators.feed_page_locators import FeedLocators
 from pages.feed_page import FeedPage
 from src.config import Config
 
@@ -36,10 +38,10 @@ class TestFeed:
         feed_page.click_to_personal_account()
         feed_page.click_history_button()
         feed_page.wait_for_orders_list()
-        number_order_from_history = driver.find_element(By.XPATH,'.//div[contains(@class, "OrderHistory_textBox")]//p').text
+        number_order_from_history = driver.find_element(*FeedLocators.NUMBER_ORDER_FROM_HISTORY).text
         feed_page.click_to_feed()
         feed_page.wait_load_feed()
-        number_order_from_feed = driver.find_element(By.XPATH, './/div[contains(@class, "OrderFeed_contentBox")]//p').text
+        number_order_from_feed = driver.find_element(*FeedLocators.NUMBER_ORDER_FROM_FEED).text
         assert number_order_from_history in number_order_from_feed, \
             f'Номер заказа из истории {number_order_from_history} и ленты {number_order_from_feed} совпадают'
 
@@ -50,7 +52,7 @@ class TestFeed:
         feed_page.open_page(Config.URL)
         feed_page.click_to_feed()
         feed_page.wait_load_feed()
-        before = driver.find_element(By.XPATH, './/div[contains(@class, "undefined")]//p[contains(@class, "OrderFeed")]').text
+        before = driver.find_element(*FeedLocators.COUNTER).text
         feed_page.click_to_personal_account()
         user_data = create_user['user_data']
         email = user_data['email']
@@ -64,9 +66,7 @@ class TestFeed:
         feed_page.click_close()
         feed_page.click_to_feed()
         feed_page.wait_load_feed()
-        time.sleep(15) #не могу понять, как здесь обойтись без time, пробовал ожиданиями - не успевает обновиться счетчик
-        after = driver.find_element(By.XPATH,
-                                    './/div[contains(@class, "undefined")]//p[contains(@class, "OrderFeed")]').text
+        after = driver.find_element(*FeedLocators.COUNTER).text
         assert before != after, f'Начальное количество заказов: {before}, конечное количество: {after}'
 
     @allure.title('Проверка изменения счетчика заказов за день')
@@ -76,7 +76,7 @@ class TestFeed:
         feed_page.open_page(Config.URL)
         feed_page.click_to_feed()
         feed_page.wait_load_feed()
-        before = driver.find_element(By.XPATH, '//*[@id="root"]/div/main/div/div/div/div[3]/p[2]').text
+        before = driver.find_element(*FeedLocators.DAY_COUNTER).text
         feed_page.click_to_personal_account()
         user_data = create_user['user_data']
         email = user_data['email']
@@ -90,8 +90,7 @@ class TestFeed:
         feed_page.click_close()
         feed_page.click_to_feed()
         feed_page.wait_load_feed()
-        time.sleep(15) #не могу понять, как здесь обойтись без time, пробовал ожиданиями - не успевает обновиться счетчик
-        after = driver.find_element(By.XPATH, '//*[@id="root"]/div/main/div/div/div/div[3]/p[2]').text
+        after = driver.find_element(*FeedLocators.DAY_COUNTER).text
         assert before != after, f'Начальное количество заказов: {before}, конечное количество: {after}'
 
     @allure.title('Проверка статуса оформленного заказа')
@@ -108,5 +107,5 @@ class TestFeed:
         feed_page.click_to_feed()
         feed_page.wait_load_feed()
         base_text = 'Все текущие заказы готовы!'
-        actual_text = driver.find_element(By.XPATH, ".//li[contains(@class, 'text_type_digits-default')]").text
+        actual_text = driver.find_element(*FeedLocators.STATUS).text
         assert actual_text != base_text, f' Номер {base_text} не совпадает с номером {actual_text}'

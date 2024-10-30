@@ -1,7 +1,6 @@
 import allure
 from pages.base_page import BasePage
 from locators.feed_page_locators import FeedLocators
-from src.config import Config
 
 class FeedPage(BasePage):
     @allure.step('Инициализация драйвера')
@@ -11,7 +10,7 @@ class FeedPage(BasePage):
 
     @allure.step('Открываем главную страницу')
     def open_page(self, url):
-        self.navigate(Config.URL)
+        self.navigate(url)
 
     @allure.step('Нажимаем на кнопку "личный кабинет" на главной странице')
     def click_to_personal_account(self):

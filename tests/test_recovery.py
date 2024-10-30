@@ -11,7 +11,7 @@ class TestRecoveryPassword:
         recovery_page.click_to_login_button()
         recovery_page.wait_for_login_page()
         recovery_page.click_recovery_button()
-        assert driver.current_url == 'https://stellarburgers.nomoreparties.site/forgot-password'
+        assert driver.current_url == Config.URL_RECOVERY
 
     @allure.title('Проверка ввода email и нажатия кнопки "Восстановить"')
     @allure.description('Тест проверяет, что можно ввести почту в поле и нажать кнопку восстановить')
@@ -24,7 +24,7 @@ class TestRecoveryPassword:
         recovery_page.set_email(TestData.test_email)
         recovery_page.click_recovery()
         recovery_page.wait_for_reset_page()
-        assert driver.current_url == 'https://stellarburgers.nomoreparties.site/reset-password'
+        assert driver.current_url == Config.URL_RESET
 
     @allure.title('Проверка активности поля "Пароль" при нажатии на кнопку "показать\скрыть пароль"')
     @allure.description('Тест проверяет, что нажатие на кнопку показать\скрыть пароль делает поле "Пароль" активным')

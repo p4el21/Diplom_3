@@ -8,8 +8,8 @@ class FeedLocators:
     WAIT_LOAD_MAIN_PAGE = By.XPATH, '//button[contains(text(), "Оформить заказ")]'
     HISTORY_BUTTON = By.XPATH, '//a[@href="/account/order-history"]'
     ORDER_INFORMATION = By.XPATH, './/li[contains(@class, "OrderHistory_listItem")]'
-    ORDER = By.XPATH, ".//div[contains(@class, 'Modal_orderBox')]"
-    ORDERS_LIST = By.XPATH, ".//div[contains(@class, 'OrderHistory_textBox')]"
+    ORDER = By.XPATH, './/div[contains(@class, "Modal_orderBox")]'
+    ORDERS_LIST = By.XPATH, './/div[contains(@class, "OrderHistory_textBox")]'
     FEED_BUTTON = By.XPATH, '//a[@href="/feed"]'
     FEED_ORDERS = By.XPATH,  './/div[contains(@class, "OrderFeed_contentBox")]'
     INGREDIENT_FIELD = By.XPATH, '//a[@href="/ingredient/61c0c5a71d1f82001bdaaa6d"]'
@@ -17,3 +17,8 @@ class FeedLocators:
     ORDER_BUTTON = By.XPATH, './/button[contains(text(), "Оформить заказ")]'
     ORDER_CONTAINER = By.XPATH, './/div[contains(@class, "Modal_modal__container")]'
     CLOSE_BUTTON = By.XPATH, '//*[@id="root"]/div/section/div[1]/button'
+    NUMBER_ORDER_FROM_HISTORY = By.XPATH,'.//div[contains(@class, "OrderHistory_textBox")]//p'
+    NUMBER_ORDER_FROM_FEED = By.XPATH, './/div[contains(@class, "OrderFeed_contentBox")]//p'
+    COUNTER = By.XPATH, './/div[contains(@class, "undefined")]//p[contains(@class, "OrderFeed")]'
+    DAY_COUNTER = By.XPATH, '//*[@id="root"]/div/main/div/div/div/div[3]/p[2]'
+    STATUS = By.XPATH, './/li[contains(@class, "text_type_digits-default")]'

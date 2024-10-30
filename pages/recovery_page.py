@@ -1,13 +1,12 @@
 import allure
 from locators.recovery_page_locators import RecoveryLocators
 from pages.base_page import BasePage
-from src.config import Config
 
 class RecoveryPage(BasePage):
 
     @allure.step('Открываем главную страницу')
     def open_page(self, url):
-        self.navigate(Config.URL)
+        self.navigate(url)
 
     @allure.step('Нажимаем на кнопку "Войти в аккаунт" на главной странице')
     def click_to_login_button(self):

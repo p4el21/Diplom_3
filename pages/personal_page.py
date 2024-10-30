@@ -1,13 +1,12 @@
 import allure
 from locators.personal_page_locators import PersonalLocators
 from pages.base_page import BasePage
-from src.config import Config
 
 class PersonalPage(BasePage):
 
     @allure.step('Открываем главную страницу')
     def open_page(self, url):
-        self.navigate(Config.URL)
+        self.navigate(url)
 
     @allure.step('Нажимаем на кнопку "Личный кабинет" в шапке')
     def click_to_button_from_up(self):

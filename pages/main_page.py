@@ -1,13 +1,12 @@
 import allure
 from locators.main_page_locators import MainLocators
 from pages.base_page import BasePage
-from src.config import Config
 
 class MainPage(BasePage):
 
     @allure.step('Открываем главную страницу')
     def open_page(self, url):
-        self.navigate(Config.URL)
+        self.navigate(url)
 
     @allure.step('Нажимаем на кнопку "Лента заказов" на главной странице')
     def click_to_orders_list(self):
